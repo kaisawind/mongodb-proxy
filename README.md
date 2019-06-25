@@ -82,6 +82,7 @@ helm install .
 It just convert mongodb datasource to simple json datasource, then use the plugin to insert data to grafana.
 
 [grafana关联mongodb数据库](https://www.kaisawind.com/mongodb/2019/03/28/grafana.html)
+
 [grafana-simple-json-datasource](https://grafana.com/plugins/grafana-simple-json-datasource)
 
 ## Contributors
