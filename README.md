@@ -5,8 +5,18 @@
 </h1>
 
 <p align="center">
-  <a href="https://travis-ci.com/kaisawind/mongodb-proxy"><img src="https://travis-ci.com/kaisawind/mongodb-proxy.svg?token=zAYkhFNqwBwmfWpeEt2s&branch=master"></a>
-  <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fkaisawind%2Fmongodb-proxy?ref=badge_shield"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkaisawind%2Fmongodb-proxy.svg?type=shield"></a>
+  <a href="https://github.com/kaisawind/mongodb-proxy/releases">
+    <img src="https://img.shields.io/github/release/kaisawind/mongodb-proxy.svg" alt="GitHub release">
+  </a>
+  <a href="https://github.com/golang">
+    <img src="https://img.shields.io/badge/golang-1.12.5-green.svg">
+  </a>
+  <a href="https://travis-ci.com/kaisawind/mongodb-proxy">
+    <img src="https://travis-ci.com/kaisawind/mongodb-proxy.svg?token=zAYkhFNqwBwmfWpeEt2s&branch=master">
+  </a>
+  <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fkaisawind%2Fmongodb-proxy?ref=badge_shield">
+    <img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkaisawind%2Fmongodb-proxy.svg?type=shield">
+  </a>
 </p>
 
 <p align="center">
