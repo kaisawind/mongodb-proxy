@@ -1,0 +1,17 @@
+namespace: 
+  deploy: false
+  name: kube-public
+env: dev
+services:
+  expose_node_port: true
+docker:
+  registry: 192.168.1.192:5000
+  pullPolicy: Always
+public:
+  mongo: 
+    address: mongo.kube-public:27017
+mongodbproxy:
+  deploy: true
+  version: latest
+  httpport: 0
+

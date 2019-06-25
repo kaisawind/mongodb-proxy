@@ -1,0 +1,48 @@
+{{ if .Values.mongodbproxy.deploy }}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mongodbproxy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: mongodbproxy
+        version: {{.Values.mongodbproxy.version}}
+    spec:
+      containers:
+      - name: mongodbproxy
+        image: {{.Values.docker.registry}}/kaisawind/mongodbproxy:{{.Values.mongodbproxy.version}}
+{{ if .Values.docker.pullPolicy }}
+        imagePullPolicy: {{.Values.docker.pullPolicy}}
+{{ end }}
+        ports:
+        - name: httpport
+          containerPort: 8080
+        command: ["/cmd-server"]
+        env:
+        - name: HOST
+          value: "0.0.0.0"
+        - name: PORT
+          value: "8080"
+        - name: PROXY_MONGO_ADDRESS
+          value: {{.Values.public.mongo.address}}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodbproxy
+  labels:
+    service: mongodbproxy
+spec:
+  type: NodePort
+  ports:
+  - name: httpport
+    port: 8080
+    targetPort: 8080
+    nodePort: {{.Values.mongodbproxy.httpport}}
+  selector:
+    service: mongodbproxy
+{{ end }}

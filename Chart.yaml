@@ -1,0 +1,11 @@
+apiVersion: v1
+version: 0.1.0
+description: A Helm chart for Kubernetes
+name: mongodbproxy
+home: https://github.com/kaisawind/mongodb-proxy
+maintainers: # (optional)
+  - name: kaisawind
+    email: wind.kaisa@gmail.com
+    url: https://github.com/kaisawind
+icon: https://s.gravatar.com/avatar/ec446ac52fcd1faf40eb2001010aae9c?s=80
+appVersion: "1.0"

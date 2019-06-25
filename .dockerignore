@@ -1,0 +1,16 @@
+apiserver
+certs
+dashboard
+docs
+pkg
+vendor
+LICENSE
+Makefile
+*.md
+.*
+*.sh
+*.js
+*.json
+*.lock
+*.html
+*.ico

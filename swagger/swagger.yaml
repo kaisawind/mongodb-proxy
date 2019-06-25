@@ -1,0 +1,177 @@
+---
+swagger: "2.0"
+info:
+  description: This is a sample mongodb proxy server.
+  version: 1.0.0
+  title: Swagger of MongoDB for Grafana plugin
+  contact:
+    email: wind.kaisa@gmail.com
+  license:
+    name: MIT License
+    url: https://mit-license.org/
+host: localhost:8080
+basePath: /
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+- name: SimpleJSON
+  description: Operations about SimpleJSON
+schemes:
+- http
+paths:
+  /:
+    get:
+      tags:
+      - SimpleJSON
+      security: []
+      summary: test connection
+      description: should return 200 ok. Used for "Test connection" on the datasource config page.
+      operationId: TestDatasource
+      responses:
+        200:
+          description: connection successfully.
+  /search:
+    post:
+      tags:
+      - SimpleJSON
+      security: []
+      summary: find metric options
+      description: used by the find metric options on the query tab in panels.
+      operationId: MetricFindQuery
+      parameters:
+      - in: body
+        name: options
+        description: The options to query.
+        schema:
+          $ref: '#/definitions/Target'
+      responses:
+        200:
+          description: find metric options successfully.
+          schema:
+            type: object
+  /annotations:
+    post:
+      tags:
+      - SimpleJSON
+      security: []
+      summary: get annotations
+      description: used by dashboards to get annotations.
+      operationId: AnnotationQuery
+      parameters:
+      - in: body
+        name: options
+        description: The options to query.
+        schema:
+          $ref: '#/definitions/Target'
+      responses:
+        200:
+          description: get annotations successfully.
+          schema:
+            $ref: '#/definitions/Annotations'
+  /query:
+    post:
+      tags:
+      - SimpleJSON
+      security: []
+      summary: query data
+      description: used by panels to get data
+      operationId: Query
+      parameters:
+      - in: body
+        name: options
+        description: The options to query.
+        schema:
+          $ref: '#/definitions/Query'
+      responses:
+        200:
+          description: query data successfully.
+          schema:
+            $ref: '#/definitions/Timeseries'
+definitions:
+  Query:
+    description: query data requests.
+    type: object
+    properties:
+      range:
+        $ref: '#/definitions/Range'
+      interval:
+        type: string
+      intervalMs:
+        type: integer
+      targets:
+        type: array
+        items:
+          $ref: '#/definitions/Target'
+      format:
+        type: string
+        enum:
+          - json
+        default: json
+      maxDataPoints:
+        type: integer
+  Target:
+    description: data target.
+    type: object
+    properties:
+      target:
+        type: string
+      refId:
+        type: string
+      type:
+        type: string
+        enum:
+          - timeserie
+          - table
+        default: timeserie
+  Annotations:
+    description: encodes the information provided by Grafana in its requests.
+    type: object
+    properties:
+      range:
+        $ref: '#/definitions/Range'
+      annotation:
+        $ref: '#/definitions/Annotation'
+  Range:
+    description: Range specifies the time range the request is valid for. 
+    type: object
+    properties:
+      from:
+        type: string
+        format: date-time
+      to:
+        type: string
+        format: date-time
+  Annotation:
+    description: Annotation is the object passed by Grafana when it fetches annotations.
+    type: object
+    properties:
+      name:
+        type: string
+      datasource:
+        type: string
+      iconColor:
+        type: string
+      enable:
+        type: boolean
+      showLine:
+        type: boolean
+      query:
+        type: string
+  Timeseries:
+    description: Request object passed to datasource.query function
+    type: array
+    items:
+      $ref: '#/definitions/Timeserie'
+  Timeserie:
+    type: object
+    properties:
+      target:
+        type: string
+      datapoints:
+        type: array
+        items:
+          type: array
+          items:
+            type: object
