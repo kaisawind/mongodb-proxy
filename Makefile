@@ -5,7 +5,7 @@ M := 1 # When M is set, build with -mod vendor.
 
 # Space separated patterns of packages to skip in list, test, format.
 IGNORED_PACKAGES := vendor
-DOCKER_REPO := 192.168.1.192:5000
+DOCKER_REPO := docker.io
 DOCKER_NAMESPACE := kaisawind
 
 .PHONY: all
