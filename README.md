@@ -27,6 +27,13 @@
 </p>
 
 ## Getting started
+
+### How to use
+
+You must have your own code to process the mongo data.
+You can coding here `<repo>/server/helper` and `<repo>/server/simplejson`.
+This repo is just a daemon which show how to connect mongo and grafana.
+
 ### Installation
 #### Install from code
 Clone mongo-proxy from the master branch of Github repository
