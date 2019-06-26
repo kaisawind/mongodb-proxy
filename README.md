@@ -8,6 +8,9 @@
   <a href="https://github.com/kaisawind/mongodb-proxy/releases">
     <img src="https://img.shields.io/github/release/kaisawind/mongodb-proxy.svg" alt="GitHub release">
   </a>
+  <a href="https://hub.docker.com/r/kaisawind/mongodbproxy">
+    <img src="https://img.shields.io/badge/docker-master-yellowgreen.svg" alt="docker hub">
+  </a>
   <a href="https://github.com/golang">
     <img src="https://img.shields.io/badge/golang-1.12.5-green.svg">
   </a>
