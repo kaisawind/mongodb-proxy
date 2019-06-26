@@ -94,6 +94,21 @@ And deploy it by helm
 helm install .
 ```
 
+### Development
+
+Use many tools to generate go source code
+
+```bash
+# go-swagger generate swagger to go code
+go get -u github.com/go-swagger/go-swagger/cmd/swagger
+```
+
+Then just run the scripts
+
+```bash
+./scripts/swagger_gen.sh
+```
+
 ## How it works
 
 It just convert mongodb datasource to simple json datasource, then use the plugin to insert data to grafana.

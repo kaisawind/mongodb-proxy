@@ -5,7 +5,9 @@ M := 1 # When M is set, build with -mod vendor.
 
 # Space separated patterns of packages to skip in list, test, format.
 IGNORED_PACKAGES := vendor
-DOCKER_REPO := docker.io
+
+# Docker informations
+DOCKER_REPO := 
 DOCKER_NAMESPACE := kaisawind
 
 .PHONY: all
@@ -23,7 +25,11 @@ apiserver:
 
 .PHONY: docker
 docker: apiserver
-	docker build -t $(DOCKER_REPO)/$(DOCKER_NAMESPACE)/mongodbproxy .
+	docker build -t $(DOCKER_REPO)$(DOCKER_NAMESPACE)/mongodbproxy .
+
+.PHONY: docker-push
+docker-push:
+	docker push $(DOCKER_REPO)$(DOCKER_NAMESPACE)/mongodbproxy
 
 ##### ^^^^^^ EDIT ABOVE ^^^^^^ #####
 

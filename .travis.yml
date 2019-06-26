@@ -1,5 +1,13 @@
+services:
+  - docker
 language: go
 go:
   - "1.12.5"
 env:
   - GO111MODULE=on
+before_script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+script:
+  - make
+  - make docker
+  - make docker-push
