@@ -20,6 +20,9 @@
   <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fkaisawind%2Fmongodb-proxy?ref=badge_shield">
     <img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkaisawind%2Fmongodb-proxy.svg?type=shield">
   </a>
+  <a href="https://codecov.io/gh/kaisawind/mongodb-proxy">
+    <img src="https://codecov.io/gh/kaisawind/mongodb-proxy/branch/master/graph/badge.svg" />
+  </a>
 </p>
 
 <p align="center">
