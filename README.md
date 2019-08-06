@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://repository-images.githubusercontent.com/167809029/f477a980-86bb-11e9-9487-8c3627dee825" alt="Kaisawind's character" width="400">
+  <img src="https://repository-images.githubusercontent.com/193614220/07d9f900-b854-11e9-9051-a3c3e32c6b5c" alt="Kaisawind's character" width="400">
   <br>
 </h1>
 
