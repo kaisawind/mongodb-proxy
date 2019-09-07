@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://repository-images.githubusercontent.com/167809029/f477a980-86bb-11e9-9487-8c3627dee825" alt="Kaisawind's character" width="400">
+  <img src="https://www.kaisawind.com/images/kaisawind.png" alt="Kaisawind's character" width="400">
   <br>
 </h1>
 
@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/badge/docker-master-yellowgreen.svg" alt="docker hub">
   </a>
   <a href="https://github.com/golang">
-    <img src="https://img.shields.io/badge/golang-1.12.5-green.svg">
+    <img src="https://img.shields.io/badge/golang-1.13-green.svg">
   </a>
   <a href="https://travis-ci.com/kaisawind/mongodb-proxy">
     <img src="https://travis-ci.com/kaisawind/mongodb-proxy.svg?token=zAYkhFNqwBwmfWpeEt2s&branch=master">
