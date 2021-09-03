@@ -6,12 +6,14 @@ package v1
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // Annotation Annotation is the object passed by Grafana when it fetches annotations.
+//
 // swagger:model Annotation
 type Annotation struct {
 
@@ -36,6 +38,11 @@ type Annotation struct {
 
 // Validate validates this annotation
 func (m *Annotation) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this annotation based on context it is used
+func (m *Annotation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -6,13 +6,14 @@ package simple_json
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/go-openapi/runtime"
+	"fmt"
 
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new simple json API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -24,18 +25,33 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-AnnotationQuery gets annotations
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
 
-used by dashboards to get annotations.
+// ClientService is the interface for Client methods
+type ClientService interface {
+	AnnotationQuery(params *AnnotationQueryParams, opts ...ClientOption) (*AnnotationQueryOK, error)
+
+	MetricFindQuery(params *MetricFindQueryParams, opts ...ClientOption) (*MetricFindQueryOK, error)
+
+	Query(params *QueryParams, opts ...ClientOption) (*QueryOK, error)
+
+	TestDatasource(params *TestDatasourceParams, opts ...ClientOption) (*TestDatasourceOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  AnnotationQuery gets annotations
+
+  used by dashboards to get annotations.
 */
-func (a *Client) AnnotationQuery(params *AnnotationQueryParams) (*AnnotationQueryOK, error) {
+func (a *Client) AnnotationQuery(params *AnnotationQueryParams, opts ...ClientOption) (*AnnotationQueryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAnnotationQueryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "AnnotationQuery",
 		Method:             "POST",
 		PathPattern:        "/annotations",
@@ -46,26 +62,36 @@ func (a *Client) AnnotationQuery(params *AnnotationQueryParams) (*AnnotationQuer
 		Reader:             &AnnotationQueryReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AnnotationQueryOK), nil
-
+	success, ok := result.(*AnnotationQueryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for AnnotationQuery: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-MetricFindQuery finds metric options
+  MetricFindQuery finds metric options
 
-used by the find metric options on the query tab in panels.
+  used by the find metric options on the query tab in panels.
 */
-func (a *Client) MetricFindQuery(params *MetricFindQueryParams) (*MetricFindQueryOK, error) {
+func (a *Client) MetricFindQuery(params *MetricFindQueryParams, opts ...ClientOption) (*MetricFindQueryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewMetricFindQueryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "MetricFindQuery",
 		Method:             "POST",
 		PathPattern:        "/search",
@@ -76,26 +102,36 @@ func (a *Client) MetricFindQuery(params *MetricFindQueryParams) (*MetricFindQuer
 		Reader:             &MetricFindQueryReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*MetricFindQueryOK), nil
-
+	success, ok := result.(*MetricFindQueryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for MetricFindQuery: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-Query queries data
+  Query queries data
 
-used by panels to get data
+  used by panels to get data
 */
-func (a *Client) Query(params *QueryParams) (*QueryOK, error) {
+func (a *Client) Query(params *QueryParams, opts ...ClientOption) (*QueryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewQueryParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "Query",
 		Method:             "POST",
 		PathPattern:        "/query",
@@ -106,26 +142,36 @@ func (a *Client) Query(params *QueryParams) (*QueryOK, error) {
 		Reader:             &QueryReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*QueryOK), nil
-
+	success, ok := result.(*QueryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for Query: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-TestDatasource tests connection
+  TestDatasource tests connection
 
-should return 200 ok. Used for "Test connection" on the datasource config page.
+  should return 200 ok. Used for "Test connection" on the datasource config page.
 */
-func (a *Client) TestDatasource(params *TestDatasourceParams) (*TestDatasourceOK, error) {
+func (a *Client) TestDatasource(params *TestDatasourceParams, opts ...ClientOption) (*TestDatasourceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTestDatasourceParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "TestDatasource",
 		Method:             "GET",
 		PathPattern:        "/",
@@ -136,12 +182,23 @@ func (a *Client) TestDatasource(params *TestDatasourceParams) (*TestDatasourceOK
 		Reader:             &TestDatasourceReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*TestDatasourceOK), nil
-
+	success, ok := result.(*TestDatasourceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for TestDatasource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

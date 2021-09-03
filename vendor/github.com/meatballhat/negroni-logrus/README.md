@@ -1,8 +1,7 @@
-negroni-logrus
-==============
+# negroni-logrus
 
-[![GoDoc](https://godoc.org/github.com/meatballhat/negroni-logrus?status.svg)](https://godoc.org/github.com/meatballhat/negroni-logrus)
-[![Build Status](https://travis-ci.org/meatballhat/negroni-logrus.svg?branch=master)](https://travis-ci.org/meatballhat/negroni-logrus)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/meatballhat/negroni-logrus)](https://pkg.go.dev/github.com/meatballhat/negroni-logrus)
+[![Main Workflow Status](https://github.com/meatballhat/negroni-logrus/workflows/main/badge.svg)](https://github.com/meatballhat/negroni-logrus/workflows/main)
 
 logrus middleware for negroni
 

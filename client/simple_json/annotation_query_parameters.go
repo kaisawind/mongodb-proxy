@@ -13,64 +13,77 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	v1 "github.com/kaisawind/mongodb-proxy/v1"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
-// NewAnnotationQueryParams creates a new AnnotationQueryParams object
-// with the default values initialized.
+// NewAnnotationQueryParams creates a new AnnotationQueryParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewAnnotationQueryParams() *AnnotationQueryParams {
-	var ()
 	return &AnnotationQueryParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewAnnotationQueryParamsWithTimeout creates a new AnnotationQueryParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewAnnotationQueryParamsWithTimeout(timeout time.Duration) *AnnotationQueryParams {
-	var ()
 	return &AnnotationQueryParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewAnnotationQueryParamsWithContext creates a new AnnotationQueryParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewAnnotationQueryParamsWithContext(ctx context.Context) *AnnotationQueryParams {
-	var ()
 	return &AnnotationQueryParams{
-
 		Context: ctx,
 	}
 }
 
 // NewAnnotationQueryParamsWithHTTPClient creates a new AnnotationQueryParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewAnnotationQueryParamsWithHTTPClient(client *http.Client) *AnnotationQueryParams {
-	var ()
 	return &AnnotationQueryParams{
 		HTTPClient: client,
 	}
 }
 
-/*AnnotationQueryParams contains all the parameters to send to the API endpoint
-for the annotation query operation typically these are written to a http.Request
+/* AnnotationQueryParams contains all the parameters to send to the API endpoint
+   for the annotation query operation.
+
+   Typically these are written to a http.Request.
 */
 type AnnotationQueryParams struct {
 
-	/*Options
-	  The options to query.
+	/* Options.
 
+	   The options to query.
 	*/
 	Options *v1.Target
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the annotation query params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *AnnotationQueryParams) WithDefaults() *AnnotationQueryParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the annotation query params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *AnnotationQueryParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the annotation query params
@@ -124,7 +137,6 @@ func (o *AnnotationQueryParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
-
 	if o.Options != nil {
 		if err := r.SetBodyParam(o.Options); err != nil {
 			return err

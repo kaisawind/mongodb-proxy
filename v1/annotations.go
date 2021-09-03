@@ -6,13 +6,15 @@ package v1
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // Annotations encodes the information provided by Grafana in its requests.
+//
 // swagger:model Annotations
 type Annotations struct {
 
@@ -42,7 +44,6 @@ func (m *Annotations) Validate(formats strfmt.Registry) error {
 }
 
 func (m *Annotations) validateAnnotation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Annotation) { // not required
 		return nil
 	}
@@ -60,13 +61,58 @@ func (m *Annotations) validateAnnotation(formats strfmt.Registry) error {
 }
 
 func (m *Annotations) validateRange(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Range) { // not required
 		return nil
 	}
 
 	if m.Range != nil {
 		if err := m.Range.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("range")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this annotations based on the context it is used
+func (m *Annotations) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAnnotation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRange(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Annotations) contextValidateAnnotation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Annotation != nil {
+		if err := m.Annotation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("annotation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Annotations) contextValidateRange(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Range != nil {
+		if err := m.Range.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("range")
 			}

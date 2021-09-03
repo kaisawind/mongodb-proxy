@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/badge/docker-master-yellowgreen.svg" alt="docker hub">
   </a>
   <a href="https://github.com/golang">
-    <img src="https://img.shields.io/badge/golang-1.13-green.svg">
+    <img src="https://img.shields.io/badge/golang-1.17-green.svg">
   </a>
   <a href="https://travis-ci.com/kaisawind/mongodb-proxy">
     <img src="https://travis-ci.com/kaisawind/mongodb-proxy.svg?token=zAYkhFNqwBwmfWpeEt2s&branch=master">

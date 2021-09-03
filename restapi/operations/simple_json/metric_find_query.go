@@ -8,7 +8,7 @@ package simple_json
 import (
 	"net/http"
 
-	middleware "github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/runtime/middleware"
 )
 
 // MetricFindQueryHandlerFunc turns a function with the right signature into a metric find query handler
@@ -29,7 +29,7 @@ func NewMetricFindQuery(ctx *middleware.Context, handler MetricFindQueryHandler)
 	return &MetricFindQuery{Context: ctx, Handler: handler}
 }
 
-/*MetricFindQuery swagger:route POST /search SimpleJSON metricFindQuery
+/* MetricFindQuery swagger:route POST /search SimpleJSON metricFindQuery
 
 find metric options
 
@@ -44,17 +44,15 @@ type MetricFindQuery struct {
 func (o *MetricFindQuery) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewMetricFindQueryParams()
-
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
 		o.Context.Respond(rw, r, route.Produces, route, err)
 		return
 	}
 
 	res := o.Handler.Handle(Params) // actually handle the request
-
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

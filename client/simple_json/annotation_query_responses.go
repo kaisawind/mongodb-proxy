@@ -10,9 +10,8 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	v1 "github.com/kaisawind/mongodb-proxy/v1"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // AnnotationQueryReader is a Reader for the AnnotationQuery structure.
@@ -23,16 +22,14 @@ type AnnotationQueryReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *AnnotationQueryReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewAnnotationQueryOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -41,7 +38,7 @@ func NewAnnotationQueryOK() *AnnotationQueryOK {
 	return &AnnotationQueryOK{}
 }
 
-/*AnnotationQueryOK handles this case with default header values.
+/* AnnotationQueryOK describes a response with status code 200, with default header values.
 
 get annotations successfully.
 */
@@ -51,6 +48,9 @@ type AnnotationQueryOK struct {
 
 func (o *AnnotationQueryOK) Error() string {
 	return fmt.Sprintf("[POST /annotations][%d] annotationQueryOK  %+v", 200, o.Payload)
+}
+func (o *AnnotationQueryOK) GetPayload() *v1.Annotations {
+	return o.Payload
 }
 
 func (o *AnnotationQueryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

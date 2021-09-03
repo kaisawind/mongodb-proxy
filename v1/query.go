@@ -6,17 +6,18 @@ package v1
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // Query query data requests.
+//
 // swagger:model Query
 type Query struct {
 
@@ -82,14 +83,13 @@ const (
 
 // prop value enum
 func (m *Query) validateFormatEnum(path, location string, value string) error {
-	if err := validate.Enum(path, location, value, queryTypeFormatPropEnum); err != nil {
+	if err := validate.EnumCase(path, location, value, queryTypeFormatPropEnum, true); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (m *Query) validateFormat(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Format) { // not required
 		return nil
 	}
@@ -103,7 +103,6 @@ func (m *Query) validateFormat(formats strfmt.Registry) error {
 }
 
 func (m *Query) validateRange(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Range) { // not required
 		return nil
 	}
@@ -121,7 +120,6 @@ func (m *Query) validateRange(formats strfmt.Registry) error {
 }
 
 func (m *Query) validateTargets(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Targets) { // not required
 		return nil
 	}
@@ -133,6 +131,56 @@ func (m *Query) validateTargets(formats strfmt.Registry) error {
 
 		if m.Targets[i] != nil {
 			if err := m.Targets[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("targets" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this query based on the context it is used
+func (m *Query) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateRange(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTargets(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Query) contextValidateRange(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Range != nil {
+		if err := m.Range.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("range")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Query) contextValidateTargets(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Targets); i++ {
+
+		if m.Targets[i] != nil {
+			if err := m.Targets[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("targets" + "." + strconv.Itoa(i))
 				}

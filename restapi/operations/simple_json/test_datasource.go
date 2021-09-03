@@ -8,7 +8,7 @@ package simple_json
 import (
 	"net/http"
 
-	middleware "github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/runtime/middleware"
 )
 
 // TestDatasourceHandlerFunc turns a function with the right signature into a test datasource handler
@@ -29,7 +29,7 @@ func NewTestDatasource(ctx *middleware.Context, handler TestDatasourceHandler) *
 	return &TestDatasource{Context: ctx, Handler: handler}
 }
 
-/*TestDatasource swagger:route GET / SimpleJSON testDatasource
+/* TestDatasource swagger:route GET / SimpleJSON testDatasource
 
 test connection
 
@@ -44,17 +44,15 @@ type TestDatasource struct {
 func (o *TestDatasource) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewTestDatasourceParams()
-
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
 		o.Context.Respond(rw, r, route.Produces, route, err)
 		return
 	}
 
 	res := o.Handler.Handle(Params) // actually handle the request
-
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

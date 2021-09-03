@@ -6,16 +6,17 @@ package v1
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"encoding/json"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // Target data target.
+//
 // swagger:model Target
 type Target struct {
 
@@ -67,14 +68,13 @@ const (
 
 // prop value enum
 func (m *Target) validateTypeEnum(path, location string, value string) error {
-	if err := validate.Enum(path, location, value, targetTypeTypePropEnum); err != nil {
+	if err := validate.EnumCase(path, location, value, targetTypeTypePropEnum, true); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (m *Target) validateType(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Type) { // not required
 		return nil
 	}
@@ -84,6 +84,11 @@ func (m *Target) validateType(formats strfmt.Registry) error {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this target based on context it is used
+func (m *Target) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

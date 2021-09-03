@@ -8,7 +8,7 @@ package simple_json
 import (
 	"net/http"
 
-	middleware "github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/runtime/middleware"
 )
 
 // AnnotationQueryHandlerFunc turns a function with the right signature into a annotation query handler
@@ -29,7 +29,7 @@ func NewAnnotationQuery(ctx *middleware.Context, handler AnnotationQueryHandler)
 	return &AnnotationQuery{Context: ctx, Handler: handler}
 }
 
-/*AnnotationQuery swagger:route POST /annotations SimpleJSON annotationQuery
+/* AnnotationQuery swagger:route POST /annotations SimpleJSON annotationQuery
 
 get annotations
 
@@ -44,17 +44,15 @@ type AnnotationQuery struct {
 func (o *AnnotationQuery) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewAnnotationQueryParams()
-
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
 		o.Context.Respond(rw, r, route.Produces, route, err)
 		return
 	}
 
 	res := o.Handler.Handle(Params) // actually handle the request
-
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

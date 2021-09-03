@@ -13,7 +13,8 @@ import (
 )
 
 // NewTestDatasourceParams creates a new TestDatasourceParams object
-// no default values defined in spec.
+//
+// There are no default values defined in the spec.
 func NewTestDatasourceParams() TestDatasourceParams {
 
 	return TestDatasourceParams{}

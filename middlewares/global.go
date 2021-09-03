@@ -4,18 +4,9 @@ import (
 	"net/http"
 
 	interpose "github.com/carbocation/interpose/middleware"
-	"github.com/dre1080/recover"
 	middleware "github.com/go-openapi/runtime/middleware"
 	"github.com/sirupsen/logrus"
 )
-
-// HandlePanic handle panics from your API requests.
-func HandlePanic(handler http.Handler) http.Handler {
-	recovery := recover.New(&recover.Options{
-		Log: logrus.Print,
-	})
-	return recovery(handler)
-}
 
 // LogViaLogrus using interpose to integrate with logrus
 func LogViaLogrus(handler http.Handler) http.Handler {

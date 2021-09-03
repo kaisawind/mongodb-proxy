@@ -9,8 +9,7 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // TestDatasourceReader is a Reader for the TestDatasource structure.
@@ -21,16 +20,14 @@ type TestDatasourceReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *TestDatasourceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewTestDatasourceOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -39,7 +36,7 @@ func NewTestDatasourceOK() *TestDatasourceOK {
 	return &TestDatasourceOK{}
 }
 
-/*TestDatasourceOK handles this case with default header values.
+/* TestDatasourceOK describes a response with status code 200, with default header values.
 
 connection successfully.
 */

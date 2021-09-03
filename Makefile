@@ -20,7 +20,7 @@ build: apiserver
 
 .PHONY: apiserver
 apiserver:
-	CGO_ENABLED=0 go build $(FLAGS)cmd-server ./cmd-server
+	CGO_ENABLED=0 go build $(FLAGS)cmd-server ./cmd/api-server
 	@echo "building apiserver completed!" 
 
 .PHONY: docker

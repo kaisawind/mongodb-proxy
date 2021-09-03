@@ -10,8 +10,7 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // MetricFindQueryReader is a Reader for the MetricFindQuery structure.
@@ -22,16 +21,14 @@ type MetricFindQueryReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *MetricFindQueryReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-
 	case 200:
 		result := NewMetricFindQueryOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -40,7 +37,7 @@ func NewMetricFindQueryOK() *MetricFindQueryOK {
 	return &MetricFindQueryOK{}
 }
 
-/*MetricFindQueryOK handles this case with default header values.
+/* MetricFindQueryOK describes a response with status code 200, with default header values.
 
 find metric options successfully.
 */
@@ -50,6 +47,9 @@ type MetricFindQueryOK struct {
 
 func (o *MetricFindQueryOK) Error() string {
 	return fmt.Sprintf("[POST /search][%d] metricFindQueryOK  %+v", 200, o.Payload)
+}
+func (o *MetricFindQueryOK) GetPayload() interface{} {
+	return o.Payload
 }
 
 func (o *MetricFindQueryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
