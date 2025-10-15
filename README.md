@@ -1,8 +1,6 @@
-<h1 align="center">
-  <br>
-  <img src="https://www.kaisawind.com/images/kaisawind.png" alt="Kaisawind's character" width="400">
-  <br>
-</h1>
+
+Grafana already supports MongoDB data sources。
+https://grafana.com/docs/plugins/grafana-mongodb-datasource/latest/
 
 <p align="center">
   <a href="https://github.com/kaisawind/mongodb-proxy/releases">
@@ -13,9 +11,6 @@
   </a>
   <a href="https://github.com/golang">
     <img src="https://img.shields.io/badge/golang-1.17-green.svg">
-  </a>
-  <a href="https://travis-ci.com/kaisawind/mongodb-proxy">
-    <img src="https://travis-ci.com/kaisawind/mongodb-proxy.svg?token=zAYkhFNqwBwmfWpeEt2s&branch=master">
   </a>
   <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fkaisawind%2Fmongodb-proxy?ref=badge_shield">
     <img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkaisawind%2Fmongodb-proxy.svg?type=shield">
