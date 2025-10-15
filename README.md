@@ -1,5 +1,6 @@
 
-Grafana already supports MongoDB data sources。
+Grafana already supports MongoDB data sources.
+
 https://grafana.com/docs/plugins/grafana-mongodb-datasource/latest/
 
 <p align="center">
